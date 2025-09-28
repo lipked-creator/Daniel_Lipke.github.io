@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Etsy OAuth Callback</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .code { background: #f4f4f4; padding: 10px; border-radius: 5px; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <h1>OAuth Callback Received</h1>
+    <p>Check the URL for the authorization code.</p>
+    <div id="code-display"></div>
+    
+    <script>
+        // Extract code from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        const state = urlParams.get('state');
+        
+        if (code) {
+            document.getElementById('code-display').innerHTML = 
+                `<h3>Authorization Code:</h3>
+                 <div class="code">${code}</div>
+                 <p><strong>State:</strong> ${state || 'N/A'}</p>
+                 <p>Copy this code and paste it into your OAuth script.</p>`;
+        } else {
+            document.getElementById('code-display').innerHTML = 
+                '<p>No authorization code found in the URL.</p>';
+        }
+    </script>
+</body>
+</html>
